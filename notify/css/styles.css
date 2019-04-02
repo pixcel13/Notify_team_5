@@ -1,0 +1,226 @@
+/* Global Styles */
+
+body {
+    font-size: 16px;
+    font-family: "Helvetica";
+    color: rgb(132, 132, 132);
+    line-height: 1.625;
+    position: relative;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 50px 0;
+}
+
+h3 {
+    color: rgb(34, 34, 34);
+    font-size: 22px;
+}
+
+.vertical-align {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/*------------------------------------
+  0. Header
+------------------------------------*/
+
+#home {
+    background: url('../images/header.jpg') fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 550px;
+    color: #fff;
+    border-top: 10px solid #2ecc71;
+}
+
+#home .logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 60px;
+}
+
+#home .logo::after {
+    content: ".";
+    color: #2ecc71;
+}
+
+#home h3 {
+    line-height: 1.5;
+    padding: 25px 0;
+    margin-right: 80px;
+	color:#fff;
+}
+
+#home ul {
+    padding-left: 0;
+    display: block;
+}
+
+#home ul li {
+    display: inline-block;
+}
+
+#home ul a {
+    text-align: center;
+    font-size: 30px;
+    color: #FFFFFFAF;
+    padding: 0 10px;
+}
+
+#home i {
+
+    width: 60px;
+    height: 60px;
+    background-color: #00000095;
+    border-radius: 150px;
+    padding: 15px;
+}
+
+#home ul i:hover {
+
+    background-color: #2ecc71;
+}
+
+
+/*---------------------------
+  1. Feature
+------------------------------------*/
+
+.features-item {
+    text-align: center;
+}
+
+.features-item i {
+    width: 90px;
+    height: 90px;
+    font-size: 50px;
+    color: #fff;
+    background-color: #2ecc71;
+    border-radius: 150px;
+    padding: 20px;
+}
+
+
+/*------------------------------------
+  2. Get notified
+------------------------------------*/
+
+#notified {
+    background-color: #e3e3e3;
+}
+
+#notified h3 {
+    font-size: 20px;
+    margin-top: 0;
+    font-weight: bold;
+
+}
+
+#notified p{
+    font-size: 15px;
+}
+
+#notified .updates {
+    margin-right: 100px;
+}
+
+.newsletter {
+    margin-top: 20px;
+}
+
+.newsletter input {
+    font-size: 18px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.newsletter .input-group-btn button {
+    padding: 8px 20px;
+    font-size: 17px;
+    color: #fff;
+    background-color: #2ecc71;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+
+/*------------------------------------
+  3. Testimonials
+------------------------------------*/
+
+.testimonials blockquote {
+    border-left: none;
+}
+
+.social h3 {
+    padding: 20px;
+    color: rgb(34, 34, 34);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.testimonials h4 {
+    padding-top: 10px;
+    color: #000000FF;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.social ul {
+    padding-left: 0;
+    display: block;
+}
+
+.social ul li {
+    display: inline-block;
+}
+
+.social ul a {
+    font-size: 30px;
+    color: #f4f4f4;
+    padding: 0 10px;
+}
+
+.social i {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(197, 197, 197);
+    border-radius: 150px;
+    padding: 10px;
+}
+
+.social ul i:hover {
+    background-color: #2ecc71;
+}
+
+
+/*------------------------------------
+  4.Footer
+------------------------------------*/
+
+#footer {
+    padding: 40px 0;
+    background-color: #e3e3e3;
+    text-align: center;
+}
+
+#footer ul {
+    padding-left: 0;
+    margin-top: 10px;
+    display: block;
+}
+
+#footer ul li {
+    display: inline-block;
+}
+
+#footer ul a {
+    color: rgb(132, 132, 132);
+    padding: 0 10px;
+    text-decoration: none;
+}
