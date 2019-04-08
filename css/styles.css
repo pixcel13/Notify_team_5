@@ -224,6 +224,7 @@ h3 {
     overflow: hidden;
     transition: all .4s ease-in;
     vertical-align: middle;
+    
 }
 #quote-carousel .carousel-indicators .active {/*animacion del carousel*/
     width: 50px;
