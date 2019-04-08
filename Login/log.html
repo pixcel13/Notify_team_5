@@ -13,12 +13,15 @@
 
   <form class="form-signin"> 
     <img src="C:\xampp\htdocs\img\Notify.png">
-      <input type="text" placeholder="Usuario" name="usuario" required>
-      <input type="password" placeholder="Contraseña" name="contraseña" required>
-      <button type="submit" id="login-button">Ingresar</button>
+      <input type="email" id="inputEmail" placeholder="Usuario" name="usuario" required>
+      <input type="password" id="inputPassword" placeholder="Contrase&ntilde;a" name="contraseña" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" id="login-button">Iniciar Sesi&oacute;n</button>
       </form>
   </div>
-  
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
   <ul class="bg-bubbles">
     <li></li>
     <li></li>
@@ -39,9 +42,9 @@
       //Selector, evento, funcion
       $("#login-button").click(function () {
         // 1. Obtener el valor del email
-        let usuario = $("#inputUsuaro").val();
+        let correo = $("#inputEmail").val();
         // 2. Obtener el valor del password
-        let password = $("#inputContraseña").val();
+        let password = $("#inputPassword").val();
         let obj = {
           "accion": "login",
           "usuario": correo,
