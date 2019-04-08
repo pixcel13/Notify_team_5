@@ -40,9 +40,9 @@ require_once("con_db.php");
 		case 'consultar_registro_features':
 			consultar_registro_features($_POST['id']);
 			break;	
-	//WORKS
-		case 'consultar_works';
-			consultar_works();
+	//HEADER
+		case 'consultar_header';
+			consultar_();
 			break;
 		case 'insertar_works';
 			insertar_works();

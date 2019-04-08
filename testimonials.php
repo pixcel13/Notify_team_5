@@ -7,15 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Usuarios</title>
+    <title>Testimonials</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
     <link href="css/estilos.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/unid-ico.ico">
 </head>
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Usuarios</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="testimonials.php">Testimonials</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -30,8 +32,8 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="usuarios.php">
-                                Usuarios <span class="sr-only">(current)</span>
+                            <a class="nav-link" href="usuarios.php">
+                                Usuarios
                             </a>
                         </li>
                         <li class="nav-item">
@@ -50,7 +52,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="testimonials.php">
+                            <a class="nav-link active" href="testimonials.php">
                                 Testimonials
                             </a>
                         </li>
@@ -65,7 +67,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Usuarios</h1>
+                    <h1 class="h2">Testimonials</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
@@ -73,13 +75,14 @@
                         </div>
                     </div>
                 </div>
-                <h2 id="h2-title">Consultar Usuarios</h2>
+                <h2 id="h2-title">Consultar Testimonials</h2>
                 <div class="table-responsive view" id="show_data">
                     <table class="table table-striped table-sm" id="list-usuarios">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Teléfono</th>
+                                <th>Puesto</th>
+                                <th>Mensaje</th>
                                 <th>Foto</th>
                                 <th>Acciones</th>
                             </tr>
@@ -96,8 +99,14 @@
                                     <input type="text" id="inputNombre" name="nombre" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="correo">Correo Electrónico</label>
-                                    <input type="email" id="inputCorreo" name="correo" class="form-control">
+                                    <label for="puesto">Puesto</label>
+                                    <input type="puesto" id="inputPuesto" name="puesto" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="descripcion">Mensaje</label>
+                                    <input type="text" id="inputMensaje" name="descripcion" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="img">Foto:</label>
@@ -106,30 +115,21 @@
                                 </div>
                                 <div id="preview"></div>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="telefono">Teléfono</label>
-                                    <input type="tel" id="inputTelefono" name="telefono" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" id="inputPassword" name="password" class="form-control">
-                                </div>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="button" class="btn btn-success" id="guardar_datos">Guardar</button>
-                            </div>
-                        </div>
-                        <div class="mensaje">
-                            <span class="alert alert-danger" id="error" style='display:none;'></span>
-                            <span class="alert alert-success" id="success" style='display:none;'></span>
-                        </div>
-                    </form>
                 </div>
-            </main>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-success" id="guardar_datos">Guardar</button>
+                    </div>
+                </div>
+                <div class="mensaje">
+                    <span class="alert alert-danger" id="error" style='display:none;'></span>
+                    <span class="alert alert-success" id="success" style='display:none;'></span>
+                </div>
+                </form>
         </div>
+        </main>
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -149,7 +149,7 @@
         //FUNCION PARA CONSULTAR A LA BD
         function consultar() {
             let obj = {
-                "accion": "consultar_usuarios"
+                "accion": "consultar_tes"
             };
             $.post("includes/_funciones.php", obj, function (respuesta) {
                 let template = ``;
@@ -157,12 +157,13 @@
                     template +=
                         `
           <tr>
-          <td>${e.nombre_usr}</td>
-          <td>${e.telefono_usr}</td>
-          <td><img src="${e.foto_usr}" class="img-thumbnail" width="100" height="100"/></td>
+          <td>${e.nombre_tes}</td>
+          <td>${e.puesto_tes}</td>
+          <td>${e.mensaje_tes}</td>
+          <td><img src="${e.foto_tes}" class="img-thumbnail" width="100" height="100"/></td>
           <td>
-          <a href="#" data-id="${e.id_usr}" class="editar_usuarios">Editar</a>
-          <a href="#" data-id="${e.id_usr}" class="eliminar_usuarios">Eliminar</a>
+          <a href="#" data-id="${e.id_tes}" class = "editar_testimonials" >Editar</a>
+          <a href="#" data-id="${e.id_tes}" class = "eliminar_testimonials">Eliminar</a>
           </td>
           </tr>
           `;
@@ -173,7 +174,7 @@
         //FUNCION PARA CAMBIAR VISTA -> FORMULARIO
         $("#nuevo_registro").click(function () {
             change_view('insert_data');
-            $("#h2-title").text("Insertar Usuario");
+            $("#h2-title").text("Insertar Testimonio");
             $("#guardar_datos").text("Guardar").data("editar", 0);
             $("#preview").html("");
             $('#ruta').attr('value', '');
@@ -181,18 +182,16 @@
         });
         //FUNCION PARA INSERTAR DATOS A LA BD
         $("#guardar_datos").click(function () {
-            let nombre_usr = $("#inputNombre").val();
-            let correo_usr = $("#inputCorreo").val();
-            let img_usr = $('#ruta').val();
-            let telefono_usr = $("#inputTelefono").val();
-            let password_usr = $("#inputPassword").val();
+            let nombre = $("#inputNombre").val();
+            let puesto = $("#inputPuesto").val();
+            let mensaje = $("#inputMensaje").val();
+            let foto_tes = $("#ruta").val();
             let obj = {
-                "accion": "insertar_usuarios",
-                "nombre_usr": nombre_usr,
-                "correo_usr": correo_usr,
-                "img_usr": img_usr,
-                "telefono_usr": telefono_usr,
-                "password_usr": password_usr
+                "accion": "insertar_testimonials",
+                "nombre": nombre,
+                "puesto": puesto,
+                "mensaje": mensaje,
+                "foto_tes": foto_tes
             }
             $("#form_data").find("input").each(function () {
                 $(this).removeClass("has-error");
@@ -204,56 +203,48 @@
                 }
             });
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_usuarios";
+                obj["accion"] = "editar_testimonials";
                 obj["id"] = $(this).data('id');
             }
             $.post("includes/_funciones.php", obj, function (v) {
                 if (v == 0) {
                     $("#error").html("Campos vacios").fadeIn();
                 }
+                if (v == 1) {
+                    alert("Testimonio Insertado");
+                    location.reload();
+                }
                 if (v == 2) {
                     $("#error").html("Favor de ingresar tu nombre").fadeIn();
                 }
                 if (v == 3) {
-                    $("#error").html("Favor de ingresar un correo electronico").fadeIn();
+                    $("#error").html("Favor de ingresar su puesto").fadeIn();
                 }
                 if (v == 4) {
-                    $("#error").html("Favor de ingresar un correo electronico valido").fadeIn();
-                }
-                if (v == 5) {
-                    $("#error").html("Favor de ingresar un telefono").fadeIn();
-                }
-                if (v == 6) {
-                    $("#error").html("Favor de ingresar un telefono numerico").fadeIn();
+                    $("#error").html("Favor de añadir un mensaje").fadeIn();
                 }
                 if (v == 7) {
-                    $("#error").html("Favor de ingresar una contraseña").fadeIn();
+                    $("#error").html("Favor de añadir una imagen").fadeIn();
                 }
-                if (v == 8) {
-                    alert("Usuario editado");
+                if (v == 5) {
+                    alert("Testimonio editado");
                     location.reload();
                 }
-                if (v == 9) {
+                if (v == 6) {
                     alert("Se produjo un error, intente nuevamente");
-                    location.reload();
-                }
-                if (v == 10) {
-                    $("#error").html("Favor de ingresar una foto").fadeIn();
-                }
-                if (v == 1) {
-                    alert("Usuario insertado");
-                    location.reload();
+                    change_view();
+                    consultar();
                 }
             });
         });
         //FUNCION PARA ELIMINAR 1 REGISTRO EN LA BD
-        $("#main").on("click", ".eliminar_usuarios", function (e) {
+        $("#main").on("click", ".eliminar_testimonials", function (e) {
             e.preventDefault();
-            let confirmacion = confirm('¿Desea eliminar este usuario?');
+            let confirmacion = confirm('¿Desea eliminar este testimonio?');
             if (confirmacion) {
                 let id = $(this).data('id'),
                     obj = {
-                        "accion": "eliminar_usuarios",
+                        "accion": "eliminar_testimonials",
                         "id": id
                     };
                 $.post("includes/_funciones.php", obj, function (respuesta) {
@@ -261,45 +252,37 @@
                     consultar();
                 });
             } else {
-                alert('El registro no se ha eliminado');
+                alert('El testimonio no se ha eliminado');
             }
         });
         //FUNCION PARA CONSULTAR REGISTRO A EDITAR
-        $("#list-usuarios").on("click", ".editar_usuarios", function (e) {
+        $("#list-usuarios").on("click", ".editar_testimonials", function (e) {
             e.preventDefault();
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "consultar_registro_usuarios",
+                    "accion": "consultar_registro_testimonials",
                     "id": id
                 };
             $("#form_data")[0].reset();
             change_view('insert_data');
-            $("#h2-title").text("Editar Usuario");
+            $("#h2-title").text("Editar Testimonio");
             $("#guardar_datos").text("Editar").data("editar", 1).data("id", id);
             $.post("includes/_funciones.php", obj, function (r) {
-                $("#inputNombre").val(r.nombre_usr);
-                $("#inputCorreo").val(r.correo_usr);
+                $("#inputNombre").val(r.nombre_tes);
+                $("#inputPuesto").val(r.puesto_tes);
+                $("#inputMensaje").val(r.mensaje_tes);
                 let template =
                     `
-                    <img src="${r.foto_usr}" class="img-thumbnail" width="200" height="200"/>
+                    <img src="${r.foto_tes}" class="img-thumbnail" width="200" height="200"/>
                     `;
-                $("#ruta").val(r.foto_usr);
+                $("#ruta").val(r.foto_tes);
                 $("#preview").html(template);
-                $("#inputTelefono").val(r.telefono_usr);
-                $("#inputPassword").val(r.password_usr);
             }, "JSON");
         });
-        //FUNCION DESHABILITAR ATRAS EN EL NAVEGADOR
-        function deshabilitaRetroceso(){
-            window.location.hash="no-back-button";
-             window.location.hash="Again-No-back-button" //chrome
-            window.onhashchange=function(){window.location.hash="no-back-button";}
-        }
         //CARGAR FUNCIONES CUANDO EL DOCUMENTO ESTE LISTO
         $(document).ready(function () {
             consultar();
             change_view();
-            deshabilitaRetroceso();
         });
         //FUNCION PARA GUARDAR IMAGENES
         $("#foto").on("change", function (e) {
@@ -334,8 +317,9 @@
             });
             $("#error").hide();
             $("#success").hide();
-            $("#h2-title").text("Consultar Usuarios");
+            $("#h2-title").text("Consultar Testimonials");
             $("#preview").html("");
+            $("#ruta").html("");
             if ($("#guardar_datos").data("editar") == 1) {
                 $("#guardar_datos").text("Guardar").data("editar", 0);
                 consultar();
