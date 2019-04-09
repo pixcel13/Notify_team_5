@@ -14,58 +14,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Usuarios</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="includes/log_out.php">Sign out</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="usuarios.php">
-                                Usuarios <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="features.php">
-                                Features
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="works.php">
-                                Works
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="ourteam.php">
-                                Our Team
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="testimonials.php">
-                                Testimonials
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="footer.php">
-                                Footer
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
+<?php require_once("navbar.php") ?>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Usuarios</h1>
+                    <h1 class="h2">Consulta Usuarios</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
@@ -73,7 +25,6 @@
                         </div>
                     </div>
                 </div>
-                <h2 id="h2-title">Consultar Usuarios</h2>
                 <div class="table-responsive view" id="show_data">
                     <table class="table table-striped table-sm" id="list-usuarios">
                         <thead>

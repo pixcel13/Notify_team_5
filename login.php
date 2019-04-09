@@ -12,7 +12,7 @@
   
 
   <form class="form-signin"> 
-    <img src="C:\xampp\htdocs\img\Notify.png">
+      <img src="img/Notify.png" alt="">
       <input type="email" id="inputEmail" placeholder="Usuario" name="usuario" required>
       <input type="password" id="inputPassword" placeholder="Contrase&ntilde;a" name="contraseña" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit" id="login-button">Iniciar Sesi&oacute;n</button>

@@ -200,6 +200,7 @@ require_once("con_db.php");
 			echo "7";
 		}else{
 			$sql = "INSERT INTO usuarios VALUES('', '$nombre', '$correo', '$img_usr', '$pass', '$telefono', 1)";
+			echo $sql;
 			$rsl = $mysqli->query($sql);
 			echo "1";
 		}
