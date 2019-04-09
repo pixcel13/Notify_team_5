@@ -475,22 +475,19 @@ require_once("con_db.php");
 		//Conectar a la bd
 		global $mysqli;
 		$nombre = $_POST['nombre'];
-		$puesto = $_POST['puesto'];
 		$mensaje = $_POST['mensaje'];
 		$foto_tes = $_POST['foto_tes'];
 		//Validacion de campos vacios
-		if (empty($nombre) && empty($puesto) && empty($mensaje) && empty($foto_tes)) {
+		if (empty($nombre) && empty($mensaje) && empty($foto_tes)) {
 			echo "0";
 		}elseif (empty($nombre)) {
 			echo "2";
-		}elseif (empty($puesto)) {
-			echo "3";
 		}elseif (empty($mensaje)) {
 			echo "4";
 		}elseif (empty($foto_tes)) {
 			echo "7";
 		}else{
-			$sql = "INSERT INTO testimonials VALUES('', '$nombre', '$puesto', '$mensaje', '$foto_tes')";
+			$sql = "INSERT INTO testimonials VALUES('', '$nombre', '$mensaje', '$foto_tes')";
 			$rsl = $mysqli->query($sql);
 			echo "1";
 		}	
@@ -516,23 +513,20 @@ require_once("con_db.php");
 		//Conectar a la bd
 		global $mysqli;
 		$nombre = $_POST['nombre'];
-		$puesto = $_POST['puesto'];
 		$mensaje = $_POST['mensaje'];
 		$foto_tes = $_POST['foto_tes'];
 		$id = $_POST['id'];
 		//Validacion de campos vacios
-		if (empty($nombre) && empty($puesto) && empty($mensaje) && empty($foto_tes)) {
+		if (empty($nombre) && empty($mensaje) && empty($foto_tes)) {
 			echo "0";
 		}elseif (empty($nombre)) {
 			echo "2";
-		}elseif (empty($puesto)) {
-			echo "3";
 		}elseif (empty($mensaje)) {
 			echo "4";
 		}elseif (empty($foto_tes)) {
 			echo "7";
 		}else{
-			$sql = "UPDATE testimonials SET nombre_tes = '$nombre', puesto_tes = '$puesto', mensaje_tes = '$mensaje', foto_tes = '$foto_tes' WHERE id_tes = '$id'";
+			$sql = "UPDATE testimonials SET nombre_tes = '$nombre', mensaje_tes = '$mensaje', foto_tes = '$foto_tes' WHERE id_tes = '$id'";
 			$rsl = $mysqli->query($sql);
 			if ($rsl) {
 				echo "5";
@@ -679,18 +673,15 @@ require_once("con_db.php");
 		global $mysqli;
 		$titulo = $_POST['titulo_f'];
 		$texto = $_POST['texto_f'];
-		$icono = $_POST['icono_f'];
 		//Validacion de campos vacios
-		if (empty($titulo) && empty($texto) && empty($icono)) {
+		if (empty($titulo) && empty($texto)) {
 			echo "0";
 		}elseif (empty($titulo)) {
 			echo "2";
 		}elseif (empty($texto)) {
 			echo "3";
-		}elseif (empty($icono)) {
-			echo "4";
 		}else{
-			$sql = "INSERT INTO features VALUES('', '$titulo', '$texto', '$icono')";
+			$sql = "INSERT INTO features VALUES('', '$titulo', '$texto')";
 			$rsl = $mysqli->query($sql);
 			echo "1";
 		}	
@@ -718,19 +709,16 @@ require_once("con_db.php");
 		global $mysqli;
 		$titulo = $_POST['titulo_f'];
 		$texto = $_POST['texto_f'];
-		$icono = $_POST['icono_f'];
 		$id = $_POST['id'];
 		//Validacion de campos vacios
-		if (empty($titulo) && empty($texto) && empty($icono)) {
+		if (empty($titulo) && empty($texto)) {
 			echo "0";
 		}elseif (empty($titulo)) {
 			echo "2";
 		}elseif (empty($texto)) {
 			echo "3";
-		}elseif (empty($icono)) {
-			echo "4";
 		}else{
-			$sql = "UPDATE features SET titulo_f = '$titulo', texto_f = '$texto', icono_f = '$icono' WHERE id_f = '$id'";
+			$sql = "UPDATE features SET titulo_f = '$titulo', texto_f = '$texto'WHERE id_f = '$id'";
 			$rsl = $mysqli->query($sql);
 			if ($rsl) {
 				echo "5";

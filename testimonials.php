@@ -33,7 +33,6 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Puesto</th>
                                 <th>Mensaje</th>
                                 <th>Foto</th>
                                 <th>Acciones</th>
@@ -50,11 +49,6 @@
                                     <label for="nombre">Nombre</label>
                                     <input type="text" id="inputNombre" name="nombre" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label for="puesto">Puesto</label>
-                                    <input type="puesto" id="inputPuesto" name="puesto" class="form-control">
-                                </div>
-                            </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="descripcion">Mensaje</label>
@@ -110,7 +104,6 @@
                         `
           <tr>
           <td>${e.nombre_tes}</td>
-          <td>${e.puesto_tes}</td>
           <td>${e.mensaje_tes}</td>
           <td><img src="${e.foto_tes}" class="img-thumbnail" width="100" height="100"/></td>
           <td>
@@ -135,13 +128,11 @@
         //FUNCION PARA INSERTAR DATOS A LA BD
         $("#guardar_datos").click(function () {
             let nombre = $("#inputNombre").val();
-            let puesto = $("#inputPuesto").val();
             let mensaje = $("#inputMensaje").val();
             let foto_tes = $("#ruta").val();
             let obj = {
                 "accion": "insertar_testimonials",
                 "nombre": nombre,
-                "puesto": puesto,
                 "mensaje": mensaje,
                 "foto_tes": foto_tes
             }
@@ -221,7 +212,6 @@
             $("#guardar_datos").text("Editar").data("editar", 1).data("id", id);
             $.post("includes/_funciones.php", obj, function (r) {
                 $("#inputNombre").val(r.nombre_tes);
-                $("#inputPuesto").val(r.puesto_tes);
                 $("#inputMensaje").val(r.mensaje_tes);
                 let template =
                     `

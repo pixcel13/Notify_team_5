@@ -35,7 +35,6 @@
                             <tr>
                                 <th>Titulo</th>
                                 <th>Texto</th>
-                                <th>Icono</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -54,14 +53,6 @@
                                     <label for="texto">Texto</label>
                                     <input type="text" id="inputTexto" name="texto" class="form-control">
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="img">Icono:</label>
-                                    <input type="file" name="foto" id="foto">
-                                    <input type="hidden" name="ruta" id="ruta" readonly="readonly">
-                                </div>
-                                <div id="preview"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -106,7 +97,6 @@
           <tr>
           <td>${e.titulo_f}</td>
           <td>${e.texto_f}</td>
-          <td><img src="${e.icono_f}" class="img-thumbnail" width="100" height="100"/></td>
           <td>
           <a href="#" data-id="${e.id_f}" class="editar_features">Editar</a>
           <a href="#" data-id="${e.id_f}" class="eliminar_features">Eliminar</a>
@@ -130,12 +120,11 @@
         $("#guardar_datos").click(function () {
             let titulo_f = $("#inputTitulo").val();
             let texto_f = $("#inputTexto").val();
-            let icono_f = $('#ruta').val();
             let obj = {
                 "accion": "insertar_features",
                 "titulo_f": titulo_f,
                 "texto_f": texto_f,
-                "icono_f": icono_f
+
             }
             $("#form_data").find("input").each(function () {
                 $(this).removeClass("has-error");
@@ -210,42 +199,12 @@
             $.post("includes/_funciones.php", obj, function (r) {
                 $("#inputTitulo").val(r.titulo_f);
                 $("#inputTexto").val(r.texto_f);
-                let template =
-                    `
-                    <img src="${r.icono_f}" class="img-thumbnail" width="200" height="200"/>
-                    `;
-                $("#ruta").val(r.icono_f);
-                $("#preview").html(template);
             }, "JSON");
         });
         //CARGAR FUNCIONES CUANDO EL DOCUMENTO ESTE LISTO
         $(document).ready(function () {
             consultar();
             change_view();
-        });
-        //FUNCION PARA GUARDAR IMAGENES
-        $("#foto").on("change", function (e) {
-            let formDatos = new FormData($("#form_data")[0]);
-            formDatos.append("accion", "carga_foto");
-            $.ajax({
-                url: "includes/_funciones.php",
-                type: "POST",
-                data: formDatos,
-                contentType: false,
-                processData: false,
-                success: function (datos) {
-                    let respuesta = JSON.parse(datos);
-                    if (respuesta.status == 0) {
-                        alert("No se cargó la foto");
-                    }
-                    let template =
-                        `
-          <img src="${respuesta.archivo}" class="img-thumbnail" width="200" height="200"/>
-          `;
-                    $("#ruta").val(respuesta.archivo);
-                    $("#preview").html(template);
-                }
-            });
         });
         //BOTON CANCELAR
         $("#main").find(".cancelar").click(function () {
