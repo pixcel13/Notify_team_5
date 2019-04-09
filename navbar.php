@@ -57,11 +57,6 @@
                                 Testimonials
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="footer.php">
-                                Footer
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </nav>
