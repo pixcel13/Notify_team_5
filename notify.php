@@ -111,17 +111,31 @@
     
     <!-- Start Testimonials -->
     <!-- id, nombre_t   texto_t imagen_t -->
-    <?php  
-                                    $c_testimonials = "SELECT * FROM testimonials ";
-                                    $r_testimonials = mysqli_query($mysqli, $c_testimonials);
-    ?>     
+ 
+     <!-- Start Testimonials -->
     <section id="testimonials">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">  
+                <div class="col-md-12">
                     <div class="carousel slide" data-ride="carousel" id="quote-carousel">
-                    <!-- Start Carousel Slides / Quotes -->            
-                        <div class="carousel-inner text-center"> 
+                    <!-- Carousel Slides / Quotes -->
+                        <div class="carousel-inner text-center">
+            <!-- Quote 1 -->
+                            <div class="item active">
+                             <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <cite>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</cite>
+                                        <small>Angie</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+          <!-- Quote n --> 
+          <?php  
+            $c_testimonials = "SELECT * FROM testimonials WHERE id_tes > 0";
+            $r_testimonials = mysqli_query($mysqli, $c_testimonials);
+          ?>                           
                             <?php while($f_testimonials = mysqli_fetch_array($r_testimonials)){ ?>   
                             <div class="item active">
                              <blockquote>
@@ -152,9 +166,15 @@
                                 <?php $car++;
                     } ?>  
                     </ol>
+                    <?php 
+                        $c_testimonials = "SELECT * FROM testimonials ";
+                        $r_testimonials = mysqli_query($mysqli, $c_testimonials);
+                        while($f_testimonials = mysqli_fetch_array($r_testimonials)) 
+                        {  ?>   
                      <div class="social text-center">
-                         <h3>Say Hi & Get in Touch</h3>
-                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse.</p>
+                         <h3><?php echo $f_testimonials['text1_tes']; ?></h3>
+                         <p><?php echo $f_testimonials['text2_tes']; ?></p>
+                     <?php } ?>  
                          <ul>
                              <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
                              <li><a href="https://es-la.facebook.com/"><i class="fa fa-facebook"></i></a></li>
