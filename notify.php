@@ -25,7 +25,6 @@
     <!-- Start Header -->
     <header id="home">
         <div class="container  vertical-align">
-
             <div class="row">
                 <div class="col-md-6 col-md-offset-1">
                     <img src="images/logo.png" alt="logotipo notify" class="img-responsive">
@@ -50,42 +49,29 @@
     <!--End Header-->
     <!-- Start Features -->
     <?php 
-    $c_features = "SELECT * FROM features LIMIT 3 OFFSET 3";
-    $r_features = mysqli_query($mysqli, $c_features);
-    while($f_features = mysqli_fetch_array($r_features)){
-        print_r($f_features);
-        ?>
-        <h3> <?php echo $f_features['texto_f'];?> </h3>
-        <?php 
-    }
+                    $fa = array("gear", "star", "globe");
+                    $i=0;
+                    $c_features = "SELECT * FROM features LIMIT 3 OFFSET 3";
+                    $r_features = mysqli_query($mysqli, $c_features); 
     ?>
     <section id="features">
         <div class="container">
             <div class="row">
+                <?php
+                    while($f_features = mysqli_fetch_array($r_features)){
+                    ?>
                 <div class="col-xs-12  col-md-4 features-item">
-                    <i class="fa fa-gear" aria-hidden="true"></i>
-
-                    <h3>Editable Theme</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse fringilla fringilla.</p>
+                    <i class="fa fa-<?php echo $fa[$i]; ?>" aria-hidden="true"></i>
+                    <h3> <?php echo $f_features['titulo_f']; ?> </h3>
+                    <p> <?php echo $f_features['texto_f']; ?></p>
+                    
                 </div>
-                <div class="col-xs-12  col-md-4 features-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <h3>Flat Design</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse fringilla fringilla.</p>
-                </div>
-                <div class="col-xs-12  col-md-4 features-item">
-                    <i class="fa fa-globe" aria-hidden="true"></i>
-                    <h3>Reach Your Audience</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse fringilla fringilla.</p>
-                </div>
+                <?php $i++;} ?>
             </div>
         </div>
     </section>
     <!--End Features-->
-
-
     <!-- Start Get notified -->
-    <!-- id, titulo_n   texto_n     video_n  -->
     <section id="notified">
         <div class="container">
             <div class="row">
