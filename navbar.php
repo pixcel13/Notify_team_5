@@ -48,8 +48,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="notify.php">
-                                Notify
+                            <a class="nav-link" href="works.php">
+                                Works
                             </a>
                         </li>
                         <li class="nav-item">

@@ -24,6 +24,22 @@ require_once("con_db.php");
 		case 'carga_foto':
 			carga_foto();
 			break;
+	//HEADER
+		case 'consultar_header':
+			consultar_header();
+			break;
+		case 'insertar_header':
+			insertar_header();
+			break;
+		case 'editar_header';
+			editar_header($_POST['id']);
+			break;
+		case 'editar_registroh';
+			editar_registroh($_POST['id']);
+			break;
+		case 'eliminar_header';
+			eliminar_header($_POST['id']);
+			break;
 	//FEATURES
 		case 'consultar_features':
 			consultar_features();
@@ -40,21 +56,21 @@ require_once("con_db.php");
 		case 'consultar_registro_features':
 			consultar_registro_features($_POST['id']);
 			break;	
-	//HEADER
-		case 'consultar_header':
-			consultar_header();
+	//WORKS
+		case 'consultar_works';
+			consultar_works();
 			break;
-		case 'insertar_header':
-			insertar_header();
+		case 'insertar_works';
+			insertar_works();
 			break;
-		case 'editar_header';
-			editar_header($_POST['id']);
+		case 'editar_works';
+			editar_works($_POST['id']);
 			break;
-		case 'editar_registroh';
-			editar_registroh($_POST['id']);
+		case 'editar_registrow';
+			editar_registrow($_POST['id']);
 			break;
-		case 'eliminar_header';
-			eliminar_header($_POST['id']);
+		case 'eliminar_works';
+			eliminar_works($_POST['id']);
 			break;
 	//TESTIMONIALS
 		case 'consultar_tes':
@@ -72,38 +88,6 @@ require_once("con_db.php");
 		case 'editar_testimonials':
 			editar_testimonials();
 			break;
-	//DOWNLOAD
-		case 'insertar_download':
-			insertar_download();
-		break;
-		case 'consultar_download':
-			consultar_download();
-		break;
-		case 'consultar_registro_download':
-			consultar_registro_download($_POST["registro"]);
-		break;
-		case 'editar_download':
-			editar_download($_POST["registro"]);
-		break;
-		case 'eliminar_download':
-			eliminar_download($_POST["registro"]);
-		break;
-	//FOOTER
-		case 'insertar_footer':
-			insertar_footer();
-		break;
-		case 'consultar_footer':
-			consultar_footer();
-		break;
-		case 'consultar_registro_footer':
-			consultar_registro_footer($_POST["registro"]);
-		break;
-		case 'editar_footer':
-			editar_footer($_POST["registro"]);
-		break;
-		case 'eliminar_footer':
-			eliminar_footer($_POST["registro"]);
-		break;
 		default:
 			# code...
 			break;
@@ -318,64 +302,40 @@ require_once("con_db.php");
 		
 			}
 	}
-	//------------------------------FUNCIONES MODULO OUR TEAM------------------------------//
-	function consultar_team(){
+	//------------------------------FUNCIONES MODULO FEATURES------------------------------//
+	function consultar_features(){
 		//Conectar a la BD
 		global $mysqli;
 		//Realizar consulta
-		$sql = "SELECT * FROM team";
+		$sql = "SELECT * FROM features";
 		$rsl = $mysqli->query($sql);
 		$array = [];
 		while ($row = mysqli_fetch_array($rsl)) {
 			array_push($array, $row);
 		}
-		echo json_encode($array); //Imprime Json encodeado	
+		echo json_encode($array); //Imprime Json encodeado
 	}
-	function insertar_integrantes(){
+	function insertar_features(){
 		//Conectar a la bd
 		global $mysqli;
-		$nombre = $_POST['nombre'];
-		$correo = $_POST['correo'];
-		$pass = $_POST['password'];
-		$puesto = $_POST['puesto'];
-		$descripcion = $_POST['descripcion'];
-		$fb = $_POST['fb'];
-		$tw = $_POST['tw'];
-		$lk = $_POST['lk'];
-		$img_team = $_POST['img_team'];
+		$titulo = $_POST['titulo_f'];
+		$texto = $_POST['texto_f'];
 		//Validacion de campos vacios
-		if (empty($nombre) && empty($correo) && empty($pass) && empty($puesto) && empty($descripcion) && empty($img_team) && empty($fb) && empty($tw) && empty($lk)) {
+		if (empty($titulo) && empty($texto)) {
 			echo "0";
-		}elseif (empty($nombre)) {
+		}elseif (empty($titulo)) {
 			echo "2";
-		}elseif (empty($correo)) {
+		}elseif (empty($texto)) {
 			echo "3";
-		}elseif ($correo != filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-			echo "4";
-		}elseif (empty($pass)) {
-			echo "5";
-		}elseif (empty($puesto)) {
-			echo "6";
-		}elseif (empty($descripcion)) {
-			echo "7";
-		}elseif (empty($fb)) {
-			echo "9";
-		}elseif (empty($tw)) {
-			echo "10";
-		}elseif (empty($lk)) {
-			echo "11";
-		}elseif (empty($img_team)) {
-			echo "8";
 		}else{
-			$sql = "INSERT INTO team VALUES('', '$nombre', '$correo', '$pass', '$puesto', '$descripcion', '$fb', '$tw', '$lk', '$img_team')";
+			$sql = "INSERT INTO features VALUES('', '$titulo', '$texto')";
 			$rsl = $mysqli->query($sql);
 			echo "1";
 		}	
 	}
-	
-	function eliminar_integrantes($id){
+	function eliminar_features($id){
 		global $mysqli;
-		$sql = "DELETE FROM team WHERE id_team = $id";
+		$sql = "DELETE FROM features WHERE id_f = $id";
 		$rsl = $mysqli->query($sql);
 		if ($rsl) {
 			echo "Se elimino correctamente";
@@ -383,58 +343,103 @@ require_once("con_db.php");
 			echo "Se genero un error, intenta nuevamente";
 		}
 	}
-	function consultar_registro_integrantes($id){
+	function consultar_registro_features($id){
 		global $mysqli;
-		$sql = "SELECT * FROM team WHERE id_team = $id";
+		$sql = "SELECT * FROM features WHERE id_f = $id";
 		$rsl = $mysqli->query($sql);
 		$fila = mysqli_fetch_array($rsl);
 		echo json_encode($fila); //Imprime Json encodeado	
 	}
-	function editar_integrantes(){
+	
+	function editar_features(){
 		//Conectar a la bd
 		global $mysqli;
-		$nombre = $_POST['nombre'];
-		$correo = $_POST['correo'];
-		$pass = $_POST['password'];
-		$puesto = $_POST['puesto'];
-		$descripcion = $_POST['descripcion'];
-		$fb = $_POST['fb'];
-		$tw = $_POST['tw'];
-		$lk = $_POST['lk'];
-		$img_team = $_POST['img_team'];
+		$titulo = $_POST['titulo_f'];
+		$texto = $_POST['texto_f'];
 		$id = $_POST['id'];
 		//Validacion de campos vacios
-		if (empty($nombre) && empty($correo) && empty($pass) && empty($puesto) && empty($descripcion) && empty($img_team) && empty($fb) && empty($tw) && empty($lk)) {
+		if (empty($titulo) && empty($texto)) {
 			echo "0";
-		}elseif (empty($nombre)) {
+		}elseif (empty($titulo)) {
 			echo "2";
-		}elseif (empty($correo)) {
+		}elseif (empty($texto)) {
 			echo "3";
-		}elseif ($correo != filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-			echo "4";
-		}elseif (empty($pass)) {
-			echo "5";
-		}elseif (empty($puesto)) {
-			echo "6";
-		}elseif (empty($descripcion)) {
-			echo "7";
-		}elseif (empty($fb)) {
-			echo "9";
-		}elseif (empty($tw)) {
-			echo "10";
-		}elseif (empty($lk)) {
-			echo "11";
-		}elseif (empty($img_team)) {
-			echo "8";
 		}else{
-			$sql = "UPDATE team SET nombre = '$nombre', correo = '$correo', password = '$pass', puesto = '$puesto', descripcion = '$descripcion', facebook_link = '$fb', twitter_link = '$tw', linkedin_link = '$lk', img_team = '$img_team' WHERE id_team = '$id'";
+			$sql = "UPDATE features SET titulo_f = '$titulo', texto_f = '$texto'WHERE id_f = '$id'";
 			$rsl = $mysqli->query($sql);
 			if ($rsl) {
-				echo "12";
+				echo "5";
 			}else{
-				echo "13";
+				echo "6";
 			}
 		}	
+	}
+	//------------------------------FUNCIONES MODULO WORKS---------------------------------//
+	function consultar_works(){
+		global $mysqli;
+		$consulta = "SELECT * FROM works";
+		$resultado = mysqli_query($mysqli,$consulta);
+		$arreglo = [];
+		while($fila = mysqli_fetch_array($resultado)){
+			array_push($arreglo, $fila);
+		}
+		echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+	}
+	function insertar_works(){
+		global $mysqli;
+		$pname_work = $_POST['pname_work'];
+		$description_work = $_POST['description_work'];
+		$img_work = $_POST['img_work'];
+		if ($pname_work == "") {
+			echo "Llena el campo Project Name";
+		}elseif ($description_work == "") {
+			echo "Llena el campo Description";
+		}elseif ($img_work == "") {
+			echo "Llena el campo Imagen";
+		}else{
+		$consulta = "INSERT INTO works VALUES ('','$pname_work','$description_work','$img_work')";
+		$resultado = mysqli_query($mysqli,$consulta);
+		echo "Se inserto el work en la BD ";
+		}
+	}
+	
+	function eliminar_works($id){
+		global $mysqli;
+		$consulta = "DELETE FROM works WHERE id_work = $id";
+		$resultado = mysqli_query($mysqli,$consulta);
+		if ($resultado) {
+			echo "Se elimino correctamente";
+		}else{
+			echo "Se genero un error, intenta nuevamente";
+		}
+		
+	}
+	function editar_registrow($id){
+		global $mysqli;
+		$consulta = "SELECT * FROM works WHERE id_work = '$id'";
+		$resultado = mysqli_query($mysqli,$consulta);
+		
+		$fila = mysqli_fetch_array($resultado);
+		echo json_encode($fila);
+	}
+	
+	function editar_works($id){
+		global $mysqli;
+		$pname_work = $_POST['pname_work'];
+		$description_work = $_POST['description_work'];
+		$img_work = $_POST['img_work'];
+		if ($pname_work == "") {
+			echo "Llene el campo Project name";
+		}elseif ($description_work == "") {
+			echo "Llene el campo Description";
+		}elseif ($img_work == "") {
+			echo "Llene el campo Img";
+		}else{
+		echo "Se edito el work correctamente";
+		$consulta = "UPDATE works SET pname_work = '$pname_work', description_work = '$description_work', img_work = '$img_work' WHERE id_work = '$id'";
+		$resultado = mysqli_query($mysqli,$consulta);
+		
+			}
 	}
 	//------------------------------FUNCIONES MODULO TESTIMONIALS------------------------------//
 	function consultar_tes(){
@@ -505,198 +510,6 @@ require_once("con_db.php");
 			echo "7";
 		}else{
 			$sql = "UPDATE testimonials SET nombre_tes = '$nombre', mensaje_tes = '$mensaje', foto_tes = '$foto_tes' WHERE id_tes = '$id'";
-			$rsl = $mysqli->query($sql);
-			if ($rsl) {
-				echo "5";
-			}else{
-				echo "6";
-			}
-		}	
-	}
-	//------------------------------FUNCIONES MODULO DOWNLOAD------------------------------//
-	function insertar_download(){
-		global $mysqli;
-		$titulo_download = $_POST['titulo_download'];
-		$subtitulo_download = $_POST['subtitulo_download'];
-		$consulta = "INSERT INTO download VALUES('', '$titulo_download', '$subtitulo_download')";
-		$resultado = mysqli_query($mysqli, $consulta);
-		if ($resultado) {
-				echo "Se agrego nuevo registro";
-			}else{
-				echo "Hubo un problema";
-			}
-		}
-	function consultar_download(){
-		global $mysqli;
-		$consulta = "SELECT * FROM download";
-		$resultado = mysqli_query($mysqli, $consulta);
-		$arreglo = [];
-		while($fila = mysqli_fetch_array($resultado)){
-			array_push($arreglo, $fila);
-		}
-		echo json_encode($arreglo); //Imprime el JSON ENCODEADO
-	}
-	function consultar_registro_download($id){
-		global $mysqli;
-		$sql = "SELECT * FROM download WHERE id_download = $id";
-		$rsl = $mysqli->query($sql);
-		$fila = mysqli_fetch_array($rsl);
-		echo json_encode($fila); //Imprime Json encodeado
-	}
-	function editar_download($id){
-		global $mysqli;
-		$titulo_download = $_POST['titulo_download'];
-		$subtitulo_download = $_POST['subtitulo_download'];
-		$consulta = "UPDATE download SET titulo_download = '$titulo_download', subtitulo_download = '$subtitulo_download' WHERE id_download = '$id'";
-		$resultado = mysqli_query($mysqli, $consulta);
-		if($resultado){
-				echo "Se editó correctamente";
-		}else{
-				echo "No se pudo editar karnal";
-		}
-	}
-	function eliminar_download($id){
-		global $mysqli;
-		$consulta = "DELETE FROM download WHERE id_download = $id";
-		$resultado = mysqli_query($mysqli, $consulta);
-		if ($resultado) {
-			echo "ya fue el dato karnal";
-		}else{
-			echo "No se quiere ir el dato karnal";
-		}
-	}
-	//------------------------------FUNCIONES MODULO FOOTER------------------------------//
-	function insertar_footer(){
-		global $mysqli;
-		$titulo_direccion = $_POST['titulo_direccion'];
-		$direccion = $_POST['direccion'];
-		$titulo_compartir = $_POST['titulo_compartir'];
-		$link_fb = $_POST['link_fb'];
-		$link_ld = $_POST['link_ld'];
-		$link_tw = $_POST['link_tw'];
-		$titulo_about = $_POST['titulo_about'];
-		$about = $_POST['about'];
-		$copyright = $_POST['copyright'];
-		
-		$consulta = "INSERT INTO footer VALUES('', '$titulo_direccion', '$direccion', '$titulo_compartir', '$link_fb', '$link_ld', '$link_tw', '$titulo_about', '$about', '$copyright')";
-		$resultado = mysqli_query($mysqli, $consulta);
-		
-		if ($resultado) {
-			echo "Se agrego nuevo registro";
-		}else{
-			echo "Hubo un problema";
-			}
-		}
-	function consultar_footer(){
-		global $mysqli;
-		$consulta = "SELECT * FROM footer";
-		$resultado = mysqli_query($mysqli, $consulta);
-		$arreglo = [];
-		while($fila = mysqli_fetch_array($resultado)){
-			array_push($arreglo, $fila);
-		}
-		echo json_encode($arreglo); //Imprime el JSON ENCODEADO
-	}
-	function consultar_registro_footer($id){
-		global $mysqli;
-		$sql = "SELECT * FROM footer WHERE id_footer = $id";
-		$rsl = $mysqli->query($sql);
-		$fila = mysqli_fetch_array($rsl);
-		echo json_encode($fila); //Imprime Json encodeado	
-	}
-	function editar_footer($id){
-		global $mysqli;
-		$titulo_direccion = $_POST['titulo_direccion'];
-		$direccion = $_POST['direccion'];
-		$titulo_compartir = $_POST['titulo_compartir'];
-		$link_fb = $_POST['link_fb'];
-		$link_ld = $_POST['link_ld'];
-		$link_tw = $_POST['link_tw'];
-		$titulo_about = $_POST['titulo_about'];
-		$about = $_POST['about'];
-		$copyright = $_POST['copyright'];
-		$consulta = "UPDATE footer SET titulo_direccion = '$titulo_direccion', direccion = '$direccion', titulo_compartir = '$titulo_compartir', link_fb = '$link_fb', link_ld ='$link_ld', link_tw ='$link_tw', titulo_about = '$titulo_about', about = '$about', copyright = '$copyright' WHERE id_footer = '$id'";
-		$resultado = mysqli_query($mysqli, $consulta);
-		if($resultado){
-			echo "Se editó correctamente";
-		}else{
-			echo "No se pudo editar karnal";
-		}
-	}
-	function eliminar_footer($id){
-		global $mysqli;
-		$consulta = "DELETE FROM footer WHERE id_footer = $id";
-		$resultado = mysqli_query($mysqli, $consulta);
-		if ($resultado) {
-			echo "ya fue el dato karnal";
-		}else{
-			echo "No se quiere ir el dato karnal";
-		}
-	}
-	//------------------------------FUNCIONES MODULO FEATURES------------------------------//
-	function consultar_features(){
-		//Conectar a la BD
-		global $mysqli;
-		//Realizar consulta
-		$sql = "SELECT * FROM features";
-		$rsl = $mysqli->query($sql);
-		$array = [];
-		while ($row = mysqli_fetch_array($rsl)) {
-			array_push($array, $row);
-		}
-		echo json_encode($array); //Imprime Json encodeado
-	}
-	function insertar_features(){
-		//Conectar a la bd
-		global $mysqli;
-		$titulo = $_POST['titulo_f'];
-		$texto = $_POST['texto_f'];
-		//Validacion de campos vacios
-		if (empty($titulo) && empty($texto)) {
-			echo "0";
-		}elseif (empty($titulo)) {
-			echo "2";
-		}elseif (empty($texto)) {
-			echo "3";
-		}else{
-			$sql = "INSERT INTO features VALUES('', '$titulo', '$texto')";
-			$rsl = $mysqli->query($sql);
-			echo "1";
-		}	
-	}
-	function eliminar_features($id){
-		global $mysqli;
-		$sql = "DELETE FROM features WHERE id_f = $id";
-		$rsl = $mysqli->query($sql);
-		if ($rsl) {
-			echo "Se elimino correctamente";
-		}else{
-			echo "Se genero un error, intenta nuevamente";
-		}
-	}
-	function consultar_registro_features($id){
-		global $mysqli;
-		$sql = "SELECT * FROM features WHERE id_f = $id";
-		$rsl = $mysqli->query($sql);
-		$fila = mysqli_fetch_array($rsl);
-		echo json_encode($fila); //Imprime Json encodeado	
-	}
-	
-	function editar_features(){
-		//Conectar a la bd
-		global $mysqli;
-		$titulo = $_POST['titulo_f'];
-		$texto = $_POST['texto_f'];
-		$id = $_POST['id'];
-		//Validacion de campos vacios
-		if (empty($titulo) && empty($texto)) {
-			echo "0";
-		}elseif (empty($titulo)) {
-			echo "2";
-		}elseif (empty($texto)) {
-			echo "3";
-		}else{
-			$sql = "UPDATE features SET titulo_f = '$titulo', texto_f = '$texto'WHERE id_f = '$id'";
 			$rsl = $mysqli->query($sql);
 			if ($rsl) {
 				echo "5";
