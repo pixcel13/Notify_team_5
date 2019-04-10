@@ -38,18 +38,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="header.php">
+                                Header
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="features.php">
                                 Features
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="works.php">
-                                Works
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="ourteam.php">
-                                Our Team
+                            <a class="nav-link" href="notify.php">
+                                Notify
                             </a>
                         </li>
                         <li class="nav-item">

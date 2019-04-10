@@ -41,36 +41,20 @@ require_once("con_db.php");
 			consultar_registro_features($_POST['id']);
 			break;	
 	//HEADER
-		case 'consultar_header';
-			consultar_();
+		case 'consultar_header':
+			consultar_header();
 			break;
-		case 'insertar_works';
-			insertar_works();
+		case 'insertar_header':
+			insertar_header();
 			break;
-		case 'editar_works';
-			editar_works($_POST['id']);
+		case 'editar_header';
+			editar_header($_POST['id']);
 			break;
-		case 'editar_registrow';
-			editar_registrow($_POST['id']);
+		case 'editar_registroh';
+			editar_registroh($_POST['id']);
 			break;
-		case 'eliminar_works';
-			eliminar_works($_POST['id']);
-			break;
-	//TEAM
-		case 'consultar_team':
-			consultar_team();
-			break;
-		case 'insertar_integrantes':
-			insertar_integrantes();
-			break;
-		case 'eliminar_integrantes';
-			eliminar_integrantes($_POST['id']);
-			break;
-		case 'consultar_registro_integrantes':
-			consultar_registro_integrantes($_POST['id']);
-			break;
-		case 'editar_integrantes':
-			editar_integrantes();
+		case 'eliminar_header';
+			eliminar_header($_POST['id']);
 			break;
 	//TESTIMONIALS
 		case 'consultar_tes':
@@ -273,10 +257,10 @@ require_once("con_db.php");
 			echo json_encode($respuesta);
 		}
 	}
-	//------------------------------FUNCIONES MODULO WORKS---------------------------------//
-	function consultar_works(){
+	//------------------------------FUNCIONES MODULO HEADER---------------------------------//
+	function consultar_header(){
 		global $mysqli;
-		$consulta = "SELECT * FROM works";
+		$consulta = "SELECT * FROM header";
 		$resultado = mysqli_query($mysqli,$consulta);
 		$arreglo = [];
 		while($fila = mysqli_fetch_array($resultado)){
@@ -284,27 +268,24 @@ require_once("con_db.php");
 		}
 		echo json_encode($arreglo); //Imprime el JSON ENCODEADO
 	}
-	function insertar_works(){
+	function insertar_header(){
 		global $mysqli;
-		$pname_work = $_POST['pname_work'];
-		$description_work = $_POST['description_work'];
-		$img_work = $_POST['img_work'];
-		if ($pname_work == "") {
-			echo "Llena el campo Project Name";
-		}elseif ($description_work == "") {
-			echo "Llena el campo Description";
-		}elseif ($img_work == "") {
+		$texto_h = $_POST['texto_h'];
+		$logo_h = $_POST['logo_h'];
+		if ($texto_h == "") {
+			echo "Llena el campo Texto";
+		}elseif ($logo_h == "") {
 			echo "Llena el campo Imagen";
 		}else{
-		$consulta = "INSERT INTO works VALUES ('','$pname_work','$description_work','$img_work')";
+		$consulta = "INSERT INTO header VALUES ('','$texto_h','$logo_h')";
 		$resultado = mysqli_query($mysqli,$consulta);
-		echo "Se inserto el work en la BD ";
+		echo "Se inserto el header en la BD ";
 		}
 	}
 	
-	function eliminar_works($id){
+	function eliminar_header($id){
 		global $mysqli;
-		$consulta = "DELETE FROM works WHERE id_work = $id";
+		$consulta = "DELETE FROM header WHERE id_h = $id";
 		$resultado = mysqli_query($mysqli,$consulta);
 		if ($resultado) {
 			echo "Se elimino correctamente";
@@ -313,29 +294,26 @@ require_once("con_db.php");
 		}
 		
 	}
-	function editar_registrow($id){
+	function editar_registroh($id){
 		global $mysqli;
-		$consulta = "SELECT * FROM works WHERE id_work = '$id'";
+		$consulta = "SELECT * FROM header WHERE id_h = '$id'";
 		$resultado = mysqli_query($mysqli,$consulta);
 		
 		$fila = mysqli_fetch_array($resultado);
 		echo json_encode($fila);
 	}
 	
-	function editar_works($id){
+	function editar_header($id){
 		global $mysqli;
-		$pname_work = $_POST['pname_work'];
-		$description_work = $_POST['description_work'];
-		$img_work = $_POST['img_work'];
-		if ($pname_work == "") {
-			echo "Llene el campo Project name";
-		}elseif ($description_work == "") {
-			echo "Llene el campo Description";
-		}elseif ($img_work == "") {
+		$texto_h = $_POST['texto_h'];
+		$logo_h = $_POST['logo_h'];
+		if ($texto_h == "") {
+			echo "Llene el campo Texto";
+		}elseif ($logo_h == "") {
 			echo "Llene el campo Img";
 		}else{
-		echo "Se edito el work correctamente";
-		$consulta = "UPDATE works SET pname_work = '$pname_work', description_work = '$description_work', img_work = '$img_work' WHERE id_work = '$id'";
+		echo "Se edito el header correctamente";
+		$consulta = "UPDATE header SET texto_h = '$texto_h', logo_h = '$logo_h' WHERE id_h = '$id'";
 		$resultado = mysqli_query($mysqli,$consulta);
 		
 			}

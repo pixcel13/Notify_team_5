@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Works</title>
+    <title>Header</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
@@ -16,11 +16,10 @@
 </head>
 
 <body>
-
         <?php require_once("navbar.php") ?>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Works</h1>
+                    <h1 class="h2">Header</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
@@ -28,14 +27,13 @@
                         </div>
                     </div>
                 </div>
-                <h2>Works</h2>
+                <h2>Header</h2>
                 <div class="table-responsive view" id="show_data">
-                    <table class="table table-striped table-sm" id="list-works">
+                    <table class="table table-striped table-sm" id="list-header">
                         <thead>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Description</th>
-                                <th>Image</th>
+                                <th>Texto</th>
+                                <th>Logo</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -43,23 +41,18 @@
                     </table>
                 </div>
 
-
                 <div id="insert_data" class="view">
                     <form action="#" id="form_data">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="pname">Project Name</label>
-                                    <input type="text" id="pname_work" name="pname" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Descripción</label>
-                                    <input type="text" id="description_work" name="description" class="form-control">
+                                    <label for="description">Texto</label>
+                                    <input type="text" id="texto_h" name="description" class="form-control">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="img">Imagen</label>
+                                    <label for="img">Logo</label>
                                     <input type="file" name="foto" id="foto">
                                     <input type="hidden" readonly="readonly" name="ruta" id="ruta">
                                     <div id="preview"></div>
@@ -92,11 +85,9 @@
                 }
             });
         }
-
         function consultar() {
             let obj = {
-                "accion": "consultar_works"
-
+                "accion": "consultar_header"
             };
             $.post("includes/_funciones.php", obj, function (respuesta) {
                 let template = ``;
@@ -104,17 +95,16 @@
                     template +=
                         `
           <tr>
-          <td>${e.pname_work}</td>
-          <td>${e.description_work}</td>
-          <td><img src="${e.img_work}" class="img-thumbnail" width="100" height="100"/></td>
+          <td>${e.texto_h}</td>
+          <td><img src="${e.logo_h}" class="img-thumbnail" width="100" height="100"/></td>
           <td>
-          <a href="#" data-id="${e.id_work}" class="editar_registro">Editar</a>
-          <a href="#" data-id="${e.id_work}" class="eliminar_registro">Eliminar</a>
+          <a href="#" data-id="${e.id_h}" class="editar_registro">Editar</a>
+          <a href="#" data-id="${e.id_h}" class="eliminar_registro">Eliminar</a>
           </td>
           </tr>
           `;
                 });
-                $("#list-works tbody").html(template);
+                $("#list-header tbody").html(template);
             }, "JSON");
         }
         $(document).ready(function () {
@@ -129,14 +119,13 @@
             $("#form_data")[0].reset();
         });
         $("#guardar_datos").click(function () {
-            let pname_work = $('#pname_work').val();
-            let description_work = $('#description_work').val();
-            let img_work = $('#ruta').val();
+            let texto_h = $('#texto_h').val();
+            let logo_h = $('#ruta').val();
             let obj = {
-                "accion": "insertar_works",
-                "pname_work": pname_work,
-                "description_work": description_work,
-                "img_work": img_work
+                "accion": "insertar_header",        
+                "texto_h": texto_h,
+                "logo_h": logo_h
+
             };
             $("#form_data").find("input").each(function () {
                 $(this).removeClass("has-error");
@@ -148,46 +137,44 @@
                 }
             });
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_works";
+                obj["accion"] = "editar_header";
                 obj["id"] = $(this).data("id");
                 $(this).text("Guardar").data("editar", 0);
                 $("#form_data")[0].reset();
             }
             $.post("includes/_funciones.php", obj, function (respuesta) {
                 alert(respuesta);
-                if (respuesta == "Se inserto el work en la BD ") {
+                if (respuesta == "Se inserto el header en la BD ") {
                     change_view();
                     consultar();
                 }
-                if (respuesta == "Se edito el work correctamente") {
+                if (respuesta == "Se edito el header correctamente") {
                     change_view();
                     consultar();
                 }
             });
         });
         //EDITAR
-        $('#list-works').on("click", ".editar_registro", function (e) {
+        $('#list-header').on("click", ".editar_registro", function (e) {
             e.preventDefault();
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "editar_registrow",
+                    "accion": "editar_registroh",
                     "id": id
                 };
             $("#form_data")[0].reset();
             change_view('insert_data');
             $("#guardar_datos").text("Editar").data("editar", 1).data("id", id);
             $.post("includes/_funciones.php", obj, function (r) {
-                $("#pname_work").val(r.pname_work);
-                $("#description_work").val(r.description_work);
+                $("#texto_h").val(r.texto_h);
                 let template =
-                    `
-                    <img src="${r.img_work}" class="img-thumbnail" width="200" height="200"/>
-                    `;
-                $("#ruta").val(r.img_work);
+                `
+                <img src="${r.logo_h}" class="img-thumbnail" width="200" height="200"/>
+                `;
+                $("#ruta").val(r.logo_h);
+
                 $("#preview").html(template);
-
             }, "JSON");
-
         });
         /* Eliminar */
         $("#main").on("click", ".eliminar_registro", function (e) {
@@ -195,15 +182,14 @@
             let confirmacion = confirm('Desea eliminar este registro?');
             if (confirmacion) {
                 let id = $(this).data('id'),
-                    obj = {
-                        "accion": "eliminar_works",
-                        "id": id
-                    };
+                obj = {
+                    "accion": "eliminar_header",
+                    "id": id
+                };
                 $.post("includes/_funciones.php", obj, function (respuesta) {
                     alert(respuesta);
                     consultar();
                 });
-
             } else {
                 alert('El registro no se ha eliminado intente nuevamente');
             }
