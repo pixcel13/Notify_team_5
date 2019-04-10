@@ -1,3 +1,4 @@
+<?php require_once("includes/con_db.php");   ?>
 <!DOCTYPE html>
 <html lang= "es-MX">
 
@@ -28,10 +29,15 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-1">
                     <img src="images/logo.png" alt="logotipo notify" class="img-responsive">
-                    <!--    ***    Primer Test Titulo Random ***    -->
-                    <!-- 
-                    <?php //$id_titulo = mt_rand(1, 15); ?>
-                    <h3><?php //echo "$id_titulo"; ?></h3> -->
+                    <?php 
+                        $c_header = "SELECT * FROM header WHERE id_h = 10";
+                        $r_header = mysqli_query($mysqli, $c_header);
+                        while($f_header = mysqli_fetch_array($r_header)){
+                            ?>
+                            <h3> <?php echo $f_header['texto_h'];?> </h3>
+                            <?php 
+                        }
+                        ?>
                     <ul>
                         <li><a href="#"><i class="fa fa-apple"></i></a></li>
                         <li><a href="#"><i class="fa fa-android"></i></a></li>
@@ -43,11 +49,22 @@
     </header>
     <!--End Header-->
     <!-- Start Features -->
+    <?php 
+    $c_features = "SELECT * FROM features LIMIT 3 OFFSET 3";
+    $r_features = mysqli_query($mysqli, $c_features);
+    while($f_features = mysqli_fetch_array($r_features)){
+        print_r($f_features);
+        ?>
+        <h3> <?php echo $f_features['texto_f'];?> </h3>
+        <?php 
+    }
+    ?>
     <section id="features">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12  col-md-4 features-item">
                     <i class="fa fa-gear" aria-hidden="true"></i>
+
                     <h3>Editable Theme</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse fringilla fringilla.</p>
                 </div>
@@ -91,77 +108,50 @@
         </div>
     </section>
     <!-- End Get notified -->
-
+    
     <!-- Start Testimonials -->
     <!-- id, nombre_t   texto_t imagen_t -->
+    <?php  
+                                    $c_testimonials = "SELECT * FROM testimonials ";
+                                    $r_testimonials = mysqli_query($mysqli, $c_testimonials);
+    ?>     
     <section id="testimonials">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12">  
                     <div class="carousel slide" data-ride="carousel" id="quote-carousel">
-                    <!-- Start Carousel Slides / Quotes -->
-                        <div class="carousel-inner text-center">
-                        <!-- Quote 1 -->
-                        <!-- Stat Whyle, cicle -->
+                    <!-- Start Carousel Slides / Quotes -->            
+                        <div class="carousel-inner text-center"> 
+                            <?php while($f_testimonials = mysqli_fetch_array($r_testimonials)){ ?>   
                             <div class="item active">
                              <blockquote>
                                 <div class="row">
-                                    <div class="col-sm-10 col-sm-offset-1">
-                                        <cite>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</cite>
-                                        <small>Angie</small>
+                                    <!-- Quote 1 -->
+                                    <div class="col-sm-10 col-sm-offset-1">    
+                                        <cite>" <?php echo $f_testimonials['mensaje_tes']; ?>"</cite>
+                                        <small><?php echo $f_testimonials['nombre_tes']; ?></small>
                                     </div>
                                 </div>
                             </blockquote>
-                        </div>                      
-                    </div>
+                        </div>
+                                 <?php } ?>  
+                        </div>                
+                        <!-- Stat Whyle, cicle -->
+                           
                     <!-- End Carousel Slides / Quotes -->                    
                     <!-- Bottom Carousel Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive" src="images/person1.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive" src="images/person2.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="2"><img class="img-responsive" src="images/person3.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="3"><img class="img-responsive" src="images/person4.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="4"><img class="img-responsive" src="images/person5.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="5"><img class="img-responsive" src="images/person6.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="6"><img class="img-responsive" src="images/person7.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="7"><img class="img-responsive" src="images/person8.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="8"><img class="img-responsive" src="images/person9.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="9"><img class="img-responsive" src="images/person10.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="10"><img class="img-responsive" src="images/person11.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="11"><img class="img-responsive" src="images/person12.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="12"><img class="img-responsive" src="images/person13.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="13"><img class="img-responsive" src="images/person14.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="14"><img class="img-responsive" src="images/person15.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="15"><img class="img-responsive" src="images/person16.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="16"><img class="img-responsive" src="images/person17.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="17"><img class="img-responsive" src="images/person18.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="18"><img class="img-responsive" src="images/person19.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="19"><img class="img-responsive" src="images/person20.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="20"><img class="img-responsive" src="images/person21.jpg" alt="">
-                        </li>
+
+                        <?php 
+                        $car=0;
+                        $c_testimonials = "SELECT * FROM testimonials ";
+                        $r_testimonials = mysqli_query($mysqli, $c_testimonials);
+                        while($f_testimonials = mysqli_fetch_array($r_testimonials)) 
+                        {  ?>   
+                                <li data-target="#quote-carousel" data-slide-to="$car"><img class="img-responsive" src="<?php echo $f_testimonials['foto_tes']; ?>" alt=""></li>
+                                <?php $car++;
+                    } ?>  
                     </ol>
-
-
                      <div class="social text-center">
                          <h3>Say Hi & Get in Touch</h3>
                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse.</p>
