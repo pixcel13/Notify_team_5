@@ -17,65 +17,49 @@
   <link href="css/estilos.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Paradox</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="../backend/includes/cerrarsesion.php">Sign out</a>
-      </li>
-    </ul>
-  </nav>
+   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Notify</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="includes/log_out.php">Sign out</a>
+            </li>
+        </ul>
+    </nav>
 
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="usuarios.php">
-                <span data-feather="home"></span>
-                Usuarios <span></span>
-              </a>
-            </li>
-             <li class="nav-item">
-              <a class="nav-link" href="encabezado.php">
-                <span data-feather="file"></span>
-                Main
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="features.php">
-                <span data-feather="file"></span>
-                Features
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="works.php">
-                <span data-feather="shopping-cart"></span>
-                Works
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="ourteam.php">
-                <span data-feather="users"></span>
-                OurTeam
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="testimonials.php">
-                <span data-feather="bar-chart-2"></span>
-                Testimonials
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="downloads.php">
-                <span data-feather="layers"></span>
-                Downloads
-              </a>
-            </li>
-        </div>
-      </nav>
+ <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="usuarios.php">
+                                Usuarios <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="features.php">
+                                Features
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="works.php">
+                                Works
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ourteam.php">
+                                Our Team
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="testimonials.php">
+                                Testimonials
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 </body>
 </html>
 <?php 
