@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>notify</title>
+    <title>Notify</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
@@ -20,7 +20,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">notify</h1>
+                    <h1 class="h2">Notify</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 id="h2-title">Consultar notify</h2>
+                <h2 id="h2-title">Consultar Notify</h2>
                 <div class="table-responsive view" id="show_data">
                     <table class="table table-striped table-sm" id="list-usuarios">
                         <thead>
@@ -98,7 +98,7 @@
           <td>${e.titulo_n}</td>
           <td>${e.texto_n}</td>
           <td>
-          <a href="#" data-id="${e.id_n}" class="editar_notify">editar</a>
+          <a href="#" data-id="${e.id_n}" class="editar_notify">Editar</a>
           <a href="#" data-id="${e.id_n}" class="eliminar_notify">Eliminar</a>
           </td>
           </tr>

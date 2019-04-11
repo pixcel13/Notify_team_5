@@ -55,23 +55,24 @@ require_once("con_db.php");
 			break;
 		case 'consultar_registro_features':
 			consultar_registro_features($_POST['id']);
+			break;
+	//NOTIFY
+		case 'consultar_notify':
+			consultar_notify();
+			break;
+		case 'insertar_notify':
+			insertar_notify();
+			break;
+		case 'eliminar_notify';
+			eliminar_notify($_POST['id']);
+			break;
+		case 'editar_notify':
+			editar_notify();
+			break;
+		case 'consultar_registro_notify':
+			consultar_registro_notify($_POST['id']);
 			break;	
-	//WORKS
-		case 'consultar_works';
-			consultar_works();
-			break;
-		case 'insertar_works';
-			insertar_works();
-			break;
-		case 'editar_works';
-			editar_works($_POST['id']);
-			break;
-		case 'editar_registrow';
-			editar_registrow($_POST['id']);
-			break;
-		case 'eliminar_works';
-			eliminar_works($_POST['id']);
-			break;
+
 	//TESTIMONIALS
 		case 'consultar_tes':
 			consultar_tes();
