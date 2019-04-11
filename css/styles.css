@@ -111,6 +111,7 @@ h3 {
     font-size: 20px;
     margin-top: 0;
     font-weight: bold;
+    margin-right: 10%;
 
 }
 
@@ -119,7 +120,7 @@ h3 {
 }
 
 #notified .updates {
-    margin-right: 100px;
+    margin-right: 10%;
 }
 
 .newsletter {
