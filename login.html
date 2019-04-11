@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es-Mx">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+
+	 <link href="css/prueba.css" rel="stylesheet">
+   
+</head>
+<body>
+<div class="wrapper">
+  <div class="container">
+    <img src="img/logo.png" alt="">
+    
+  <form class="form-signin">
+ 
+  <h1 id="text1" class="h3 mb-3 font-weight-normal"></h1>
+  <label for="inputEmail" class="sr-only"></label>
+  <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de correo" required autofocus>
+  <label for="inputPassword" class="sr-only"></label>
+  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <button class="btn btn-lg btn-primary btn-block" id= "buttonSign" type="button">Iniciar</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+</form>
+  </div>
+  
+  <ul class="bg-bubbles">
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  <li><img class="img-responsive" src="img/logo.png" alt="">
+                        </li>
+  </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+<script>
+
+    $("#buttonSign").click(function(){
+    let correo = $("#inputEmail").val();
+    // Obtener Valor del email
+    let pass = $("#inputPassword").val();
+    // Obtener el valor de Password
+    let obj = {
+      "action" : "login",
+      "correo" : correo,
+      "password" : pass  
+    };
+    if (correo == "" || pass == "") {
+      //  Si usuario y contraseña estan vacios imprimir = 3 
+       alert("Ingresa Correo y Contraseña [ERROR-03]");
+    } 
+    else{
+    $.post('includes/_funciones.php', obj, function() {
+       window.location.replace("usuarios.php");
+    });
+    }
+    
+});
+</script>
+</body>
+</html>
