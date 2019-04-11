@@ -302,6 +302,78 @@ require_once("con_db.php");
 		
 			}
 	}
+	//------------------------------FUNCIONES MODULO NOTIFY------------------------------//
+	function consultar_notify(){
+		//Conectar a la BD
+		global $mysqli;
+		//Realizar consulta
+		$sql = "SELECT * FROM notify";
+		$rsl = $mysqli->query($sql);
+		$array = [];
+		while ($row = mysqli_fetch_array($rsl)) {
+			array_push($array, $row);
+		}
+		echo json_encode($array); //Imprime Json encodeado
+	}
+	function insertar_notify(){
+		//Conectar a la bd
+		global $mysqli;
+		$titulo = $_POST['titulo_n'];
+		$texto = $_POST['texto_n'];
+		//Validacion de campos vacios
+		if (empty($titulo) && empty($texto)) {
+			echo "0";
+		}elseif (empty($titulo)) {
+			echo "2";
+		}elseif (empty($texto)) {
+			echo "3";
+		}else{
+			$sql = "INSERT INTO notify VALUES('', '$titulo', '$texto')";
+			$rsl = $mysqli->query($sql);
+			echo "1";
+		}	
+	}
+	function eliminar_notify($id){
+		global $mysqli;
+		$sql = "DELETE FROM notify WHERE id_n = $id";
+		$rsl = $mysqli->query($sql);
+		if ($rsl) {
+			echo "Se elimino correctamente";
+		}else{
+			echo "Se genero un error, intenta nuevamente";
+		}
+	}
+	function consultar_registro_notify($id){
+		global $mysqli;
+		$sql = "SELECT * FROM notify WHERE id_n = $id";
+		$rsl = $mysqli->query($sql);
+		$fila = mysqli_fetch_array($rsl);
+		echo json_encode($fila); //Imprime Json encodeado	
+	}
+	
+	function editar_notify(){
+		//Conectar a la bd
+		global $mysqli;
+		$titulo = $_POST['titulo_n'];
+		$texto = $_POST['texto_n'];
+		$id = $_POST['id'];
+		//Validacion de campos vacios
+		if (empty($titulo) && empty($texto)) {
+			echo "0";
+		}elseif (empty($titulo)) {
+			echo "2";
+		}elseif (empty($texto)) {
+			echo "3";
+		}else{
+			$sql = "UPDATE notify SET titulo_n = '$titulo', texto_n = '$texto'WHERE id_n = '$id'";
+			$rsl = $mysqli->query($sql);
+			if ($rsl) {
+				echo "5";
+			}else{
+				echo "6";
+			}
+		}	
+	}
 	//------------------------------FUNCIONES MODULO FEATURES------------------------------//
 	function consultar_features(){
 		//Conectar a la BD
@@ -373,73 +445,6 @@ require_once("con_db.php");
 				echo "6";
 			}
 		}	
-	}
-	//------------------------------FUNCIONES MODULO WORKS---------------------------------//
-	function consultar_works(){
-		global $mysqli;
-		$consulta = "SELECT * FROM works";
-		$resultado = mysqli_query($mysqli,$consulta);
-		$arreglo = [];
-		while($fila = mysqli_fetch_array($resultado)){
-			array_push($arreglo, $fila);
-		}
-		echo json_encode($arreglo); //Imprime el JSON ENCODEADO
-	}
-	function insertar_works(){
-		global $mysqli;
-		$pname_work = $_POST['pname_work'];
-		$description_work = $_POST['description_work'];
-		$img_work = $_POST['img_work'];
-		if ($pname_work == "") {
-			echo "Llena el campo Project Name";
-		}elseif ($description_work == "") {
-			echo "Llena el campo Description";
-		}elseif ($img_work == "") {
-			echo "Llena el campo Imagen";
-		}else{
-		$consulta = "INSERT INTO works VALUES ('','$pname_work','$description_work','$img_work')";
-		$resultado = mysqli_query($mysqli,$consulta);
-		echo "Se inserto el work en la BD ";
-		}
-	}
-	
-	function eliminar_works($id){
-		global $mysqli;
-		$consulta = "DELETE FROM works WHERE id_work = $id";
-		$resultado = mysqli_query($mysqli,$consulta);
-		if ($resultado) {
-			echo "Se elimino correctamente";
-		}else{
-			echo "Se genero un error, intenta nuevamente";
-		}
-		
-	}
-	function editar_registrow($id){
-		global $mysqli;
-		$consulta = "SELECT * FROM works WHERE id_work = '$id'";
-		$resultado = mysqli_query($mysqli,$consulta);
-		
-		$fila = mysqli_fetch_array($resultado);
-		echo json_encode($fila);
-	}
-	
-	function editar_works($id){
-		global $mysqli;
-		$pname_work = $_POST['pname_work'];
-		$description_work = $_POST['description_work'];
-		$img_work = $_POST['img_work'];
-		if ($pname_work == "") {
-			echo "Llene el campo Project name";
-		}elseif ($description_work == "") {
-			echo "Llene el campo Description";
-		}elseif ($img_work == "") {
-			echo "Llene el campo Img";
-		}else{
-		echo "Se edito el work correctamente";
-		$consulta = "UPDATE works SET pname_work = '$pname_work', description_work = '$description_work', img_work = '$img_work' WHERE id_work = '$id'";
-		$resultado = mysqli_query($mysqli,$consulta);
-		
-			}
 	}
 	//------------------------------FUNCIONES MODULO TESTIMONIALS------------------------------//
 	function consultar_tes(){
