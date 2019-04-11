@@ -72,23 +72,32 @@
     </section>
     <!--End Features-->
     <!-- Start Get notified -->
+     <?php 
+        $c_notified = "SELECT * FROM notified LIMIT 1 OFFSET 3";
+        $r_notified = mysqli_query($mysqli, $c_notified); 
+    ?>
     <section id="notified">
         <div class="container">
             <div class="row">
+                <?php while($f_notified = mysqli_fetch_array($r_notified)){ 
+                    ?>
                 <div class="col-xs-12  col-md-6">
                    <div class="updates">
-                         <h3>Get Notified Of Any Updates!</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse fringilla fringilla nisi congue congue. Maecenas nec condimtum libero, at elementum mauris. Phasellus eget nisi dapibus, ultrices nisi at, hendrerit risusuis ornare luctus id sollicitudin ante lobortis at.</p>
+                        <?php $url = $f_notified['url_not'];?>
+                         <h3> <?php echo $f_notified['titulo_not']; ?> </h3>
+                        <p><?php echo $f_notified['texto_not']; ?></p>
                         <form>
                             <div class="input-group newsletter">
                                 <input type="email" class="form-control" placeholder="Email Address">
                                 <span class="input-group-btn"><button class="btn btn-default" type="submit">Notify</button></span>
                             </div>
+                        <?php  } ?>
                         </form>
                     </div>
                 </div>
+
             <div class="video-container">
-            <iframe src="https://player.vimeo.com/video/12199910?autoplay=1&muted=1&loop=1" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <iframe src="https://player.vimeo.com/<?php echo $url?>" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             </div>
         </div>
@@ -99,30 +108,19 @@
     <!-- id, nombre_t   texto_t imagen_t -->
  
      <!-- Start Testimonials -->
+    <?php  
+            $c_testimonials = "SELECT * FROM testimonials";
+            $r_testimonials = mysqli_query($mysqli, $c_testimonials);
+          ?> 
     <section id="testimonials">
         <div class="container">
             <div class="row">
+                <?php while($f_testimonials = mysqli_fetch_array($r_testimonials)){ ?>   
                 <div class="col-md-12">
                     <div class="carousel slide" data-ride="carousel" id="quote-carousel">
                     <!-- Carousel Slides / Quotes -->
                         <div class="carousel-inner text-center">
-            <!-- Quote 1 -->
-                            <div class="item active">
-                             <blockquote>
-                                <div class="row">
-                                    <div class="col-sm-10 col-sm-offset-1">
-                                        <cite>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</cite>
-                                        <small>Angie</small>
-                                    </div>
-                                </div>
-                            </blockquote>
-                        </div>
           <!-- Quote n --> 
-          <?php  
-            $c_testimonials = "SELECT * FROM testimonials WHERE id_tes > 0";
-            $r_testimonials = mysqli_query($mysqli, $c_testimonials);
-          ?>                           
-                            <?php while($f_testimonials = mysqli_fetch_array($r_testimonials)){ ?>   
                             <div class="item active">
                              <blockquote>
                                 <div class="row">
@@ -134,7 +132,6 @@
                                 </div>
                             </blockquote>
                         </div>
-                                 <?php } ?>  
                         </div>                
                         <!-- Stat Whyle, cicle -->
                            
@@ -172,6 +169,7 @@
                      </div>
                 </div>
             </div>
+            <?php } ?>  
         </div>
     </div>
 </section>
